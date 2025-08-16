@@ -1,6 +1,4 @@
 window.onload = function(){
-    document.querySelector("h1").innerText = "Refresh Me!";
-    setTimeout(()=>{
         const p1 = Math.floor(Math.random()*6+1);
         const p2 = Math.floor(Math.random()*6+1);
         
@@ -21,6 +19,5 @@ window.onload = function(){
         const pattern2 = [[4],[2, 6],[2, 4, 6],[0, 2, 6, 8],[0, 2, 4, 6, 8], [0, 2, 3, 5, 6, 8]]
         
         pattern2[p2-1].forEach(i=>dice2[i].classList.add("filled"))
-    },1000)
     
 }
