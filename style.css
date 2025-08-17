@@ -1,58 +1,116 @@
-body {
-    background: linear-gradient(135deg, #1e1f29, #16222A); /* dark teal/blue gradient */
+/* ========= THEME ========= */
+:root{
+  --bg1:#1e1f29;
+  --bg2:#16222A;
+  --neon:#FF007F;
+  --text:#FFFFFF;
+}
+
+/* ========= BASE ========= */
+html,body{height:100%}
+body{
+  background: linear-gradient(135deg, var(--bg1), var(--bg2));
+  margin:0;
+  color:var(--text);
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+/* Heading */
+h1{
+  margin:24px 12px 8px;
+  text-align:center;
+  font-family:cursive;
+  color:var(--neon);
+  font-size:clamp(2.2rem, 6vw, 5rem);
+  text-shadow:0 0 15px var(--neon), 0 0 30px #DA0463;
+}
+
+/* ========= LAYOUT ========= */
+.players{
+  max-width:min(1100px, 92vw);
+  margin:24px auto 0;
+  display:grid;
+  grid-template-columns: repeat(2, minmax(220px, 1fr));
+  gap: clamp(16px, 4vw, 48px);
+  align-items:start;
+  justify-items:center;   /* center each player block */
+  text-align:center;
+}
+
+/* stack on small screens */
+@media (max-width: 768px){
+  .players{ grid-template-columns: 1fr; }
+}
+
+/* Player labels */
+.player1 h2, .player2 h2{
+  margin:0 0 12px;
+  font-family: monospace;
+  color:var(--text);
+  font-size:clamp(1.1rem, 3.2vw, 2rem);
+  text-shadow:0 0 10px var(--neon);
+}
+
+/* ========= DICE ========= */
+/* apply same look to both dice boxes */
+.dice1, .dice2{
+  background:#0f1116;
+  border-radius:24px;
+  box-shadow:0 0 24px var(--neon);
+  width:clamp(150px, 22vw, 260px);
+  height:clamp(150px, 22vw, 260px);
+
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap:0;
+  place-items:center;     /* centers pips in their cells */
+}
+
+/* Base pip size; JS toggles .filled on the 9 cells */
+.pip{                       /* add this class to all 9 cells if you have it */
+  width:clamp(14px, 2.2vw, 28px);
+  height:clamp(14px, 2.2vw, 28px);
+  border-radius:50%;
+  background:transparent;
+  box-shadow:none;
+}
+
+/* Visible pip */
+.filled{
+  width:clamp(14px, 2.2vw, 28px);
+  height:clamp(14px, 2.2vw, 28px);
+  border-radius:50%;
+  background: var(--neon);
+  box-shadow: 0 0 10px #ff33cc, 0 0 18px var(--neon);
+}
+
+/* ========= FOOTER ========= */
+footer{
+  margin: clamp(24px, 6vw, 80px) auto 0;
+  padding: 12px 16px;
+  max-width:min(1100px, 92vw);
+  color:#fff;
+  text-align:center;
+  font-size:clamp(1rem, 3.2vw, 1.8rem);
+  line-height:1.35;
+  text-shadow:0 0 12px var(--neon);
+  word-break: break-word;       /* lets long names wrap */
+  background: rgba(30,31,41,0.55);
+  border-top:2px solid var(--neon);
+  box-shadow:0 -6px 24px var(--neon);
+  border-radius:12px;
+}
+
+/* Sticky footer on phones */
+@media (max-width: 768px){
+  footer{
+    position: fixed;
+    bottom: 0; left: 50%;
+    transform: translateX(-50%);
+    width: min(100%, 640px);
     margin: 0;
-    padding: 0;
-}
-
-h1 {
-    font-size: 100px;
-    font-family: cursive;
-    text-align: center;
-    color: #FF007F; /* neon pink heading */
-    text-shadow: 0 0 15px #FF007F, 0 0 30px #DA0463; /* glowing effect */
-}
-
-footer {
-     color: #FFFFFF; /* pure white */
-    text-shadow: 0 0 12px #FF007F; 
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    font-size: 3rem;
-    text-align: center;
-    margin-top: 100px;
-}
-
-.players {
-    display: flex;
-    justify-content: space-around;
-    text-align: center;
-}
-
-.player1 h2, 
-.player2 h2 {
-    font-family: monospace;
-    font-size: 50px;
-    color: #FFFFFF; /* white labels */
-    text-shadow: 0 0 10px #FF007F; /* glowing pink */
-}
-
-.dice1, .dice2 {
-    background-color: #FF007F;
-    height: 300px;
-    width: 300px;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;   
-    grid-template-rows: 1fr 1fr 1fr;
-    justify-content: center;
-    text-align: center;   
-    border-radius: 40px;
-    box-shadow: 0 0 25px #FF007F; /* glowing dice */
-}
-
-.filled {
-    margin: 20px 4px 2px 24px;
-    background-color: white;
-    border-radius: 50%;
-    height: 50px;
-    width: 50px;
-    box-shadow: 0 0 10px #FFFFFF; /* glowing dots */
+    border-radius: 12px 12px 0 0;
+  }
+  body{ padding-bottom: 88px; } /* avoid overlap with sticky footer */
 }
